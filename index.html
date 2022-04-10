@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Javascript Quiz   </title>
+    <link rel="stylesheet" href="assets/css/style.css"> 
+</head>
+<body>
+    <main> 
+    <div class="container">
+        <div id="topBanner">
+                <div class="boxes highScore">
+                    HighScores
+                </div>
+                <div class="boxes timerContainer">
+                     <div class="timerTxt">
+                        Timer: 
+                    </div> 
+                     <div class="timerCount">  </div>
+                     
+                </div>
+        </div>
+        <div id="home" class="flex-column flex-center">
+        <h1> Coding Quiz Challenge </h1>
+        <p> Try to answer the following code-related questions within the time limit. <br> Keep in mind that incorrect answers will penalize your score time by ten seconds! </p>
+        <button id="startBtn" > start Quiz </button>
+        
+        </div>
+
+        <div id="quizContainer">   
+        <div id="title"> </div>
+            <ul>
+                <li class="alternative" data-altnum="0"></li>
+                <li class="alternative" data-altnum="1"></li>
+                <li class="alternative" data-altnum="2"></li>
+            </ul>
+            <div id="response"> </div>
+        </div> 
+
+        <div id="results"> 
+            <h2> Game Over </h2>
+            <div id="scores"> Last Scores:  </div>
+            <form id="initials-form" method="POST">
+                <!-- <label for="initials-text"> Enter Initials: </label> -->
+                <input type="text" placeholder="add your name..." name="initials-text" id="initials-text" />
+                <button id="formSubmit"> Submit </button>
+                <div id="msg"></div>
+            </form>
+            <div id="userScores">
+                <h3> HighScores:  </h3>
+                <p> Last Player: <span id="userId"> </span> </p>
+                <p> Score: <span id="userScore"> </span> </p>
+                <p> Clear Scores <span id="clearLast"> </span> </p>
+            </div>   
+            <div id="restartBtn"> Restart Game </div>
+        </div>
+
+        <div class="btnFlex"> 
+        <button id="nextBtn"> Next Question </button>
+        <button id="submitBtn"> Submit </button>
+         </div>
+        </div> 
+    </div>
+    </main>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
