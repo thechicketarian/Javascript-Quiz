@@ -130,6 +130,8 @@ submitButton.addEventListener('click', submitScreen);
 // local storage 
 
 var userInitialSpan = document.querySelector('#userId');
+var userScoreSpan = document.querySelector('#userScore');
+
 var formLogButton = document.querySelector("#formSubmit");
 var msgDiv = document.querySelector("#msg");
 
@@ -139,21 +141,33 @@ function displayMessage(type, message) {
   }
 
 function renderUsersInitals(){
-    var userContent = localStorage.getItem('initials-text');
-    userInitialSpan.textContent = userContent;
-    console.log(userContent);
+    var savedScoresArray = JSON.parse(localStorage.getItem('initials-text'));
+    var userIntials = savedScoresArray[1].initials;
+    userInitialSpan.textContent = userIntials;
+    
+    var userScores = savedScoresArray[1].score;
+    userScoreSpan.textContent = userScores;
 };
 
 formLogButton.addEventListener("click", function(event) {
     event.preventDefault();
     var inUserValue = document.querySelector('#initials-text').value;
 
+    var previousScoresArray = JSON.parse(localStorage.getItem('initials-text')) || [];
+
+    
     if (inUserValue === "") {
         displayMessage("error", "Initials cannot be left blank");
     } else {
+        // save initals and score 
+        var inputObject = {
+            initials: inUserValue,
+            score: timerCount
+        }
+        previousScoresArray.push(inputObject);
         displayMessage("success", "Registered successfully");
 
-     localStorage.setItem("initials-text", inUserValue);
+     localStorage.setItem("initials-text", JSON.stringify(previousScoresArray));
      renderUsersInitals();
     }
 });
@@ -165,28 +179,25 @@ function activateHighScore(){
 };
 
 
-
 highScoreLink.addEventListener("click",activateHighScore);
 
 var restartQuizButton = document.getElementById('restartBtn');
 
 function restartQuiz () {
     resultsDiv.style.display = "none";
-    homeContainer.style.display = "block"; 
+    quizContainer.style.display = "block";
+    timerCount = 15;
+    currentQuestionIndex= 0; 
+    //need to tie in buttons 
+    startTimer();
+    renderQuestion();
     
 }
+ 
 
 restartQuizButton.addEventListener("click", restartQuiz);
 
-// var scores = 0;
 
-// function renderAnswer(){
-//     var scoreCount = document.getElementById('#scores');
-//     scoreCount.textContent= "";
-//     if (htmlNum === question[currentQuestionIndex].correctAnswer){
-//         score ++;
-//     } 
-// }
 
 // FUTURE FUNCTIONALITIES: 
 // create a parameter that if the user gets a question wrong -10 secs are deductive from the overall time
